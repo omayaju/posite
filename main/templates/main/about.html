@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% load staticfiles %}
+{% load mptt_tags %}
+
+{% block back-src %}
+	<img class = "img-std" src="{%static "css/images/back4.jpg" %}" alt="Unsplashed background img 1">
+{% endblock %}
+
+
+{% block parallax-height %}
+	350px
+{% endblock %}
+
+{% block parallax-title %}
+	<div class="container">
+	        <div class="row center">
+	          		<h4 class="header col s12 white-text cn valign">О компании "Perfect Organics"</h4>
+	        </div>
+	        <br><br>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="section scrollspy" id="content">
+    <div class="container">
+        <h4 class="blue-text text-darken-3">Описание:</h4>
+        <p class="grey-text text-darken-2">Сегодня «Perfect Organics» — это один из лидеров среди молодых развивающихся компаний на Российском рынке прямых продаж. Несмотря на свое открытие в столь сложное экономическое время, за 9 месяцев своей работы компания открыла уже более 90 представительств в России и странах СНГ, собрала под свои знамёна несколько тысяч Партнеров. За столь короткое время сформировала себе имидж молодой, надежной, перспективной и стремительно растущей компании с высококачественным конкурентным продуктом, и, главное, доступным по цене для Российского потребителя.
+Помимо перечисленных услуг и продуктов Компания предлагает своим Партнерам сотрудничество в формировании дополнительного источника дохода или помощь в построении собственного бизнеса без финансовых вложений. За 9 месяцев развития уже не одна сотня партнеров по бизнесу убедились в этичности и результативности компании, получив успешные результаты в собственном бизнесе, заработав первые деньги, и за несколько месяцев сотрудничества заслужив бесплатный отдых за границей по системе «все включено».
+Невероятный, стремительный рост Партнеров по бизнесу объясняется грамотным руководством Президента компании, который имеет 20 лет успешного опыта в организации бизнеса прямых продаж, заработавшего за это время не один миллион долларов и воспитавшего не одного миллионера, и наличием умелой грамотной команды руководителей.
+Сегодня любой имеет возможность начать свой Успешный бизнес в сотрудничестве с «Perfect Organics». Фактически, человек получает бизнес под ключ, где у него есть поддержка и прямой консультант-руководитель.</p>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col s6 m6 l6">
+                <h4 class="blue-text text-darken-3">Контакты: </h4>
+                <p><i class="material-icons">store</i> Адрес офиса в г. Дзержинск: </p>
+                <p><i class="material-icons">call</i> Номер телефона: </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <h4 class="blue-text text-darken-3">Офис на карте:</h4>
+    </div>
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=tggyDbnYGl5v4SbRkpLcyQCSRFoVrQ_x&amp;width=100%&amp;height=413&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>
+    <div class="section" id="tggyDbnYGl5v4SbRkpLcyQCSRFoVrQ_x"></div>
+</div>
+{% endblock %}

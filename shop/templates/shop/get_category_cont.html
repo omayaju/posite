@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+
+{% load staticfiles %}
+{% load mptt_tags %}
+
+{% block back-src %}
+	<img class = "img-std" src="{%static "css/images/back2.jpg" %}" alt="Unsplashed background img 1">
+{% endblock %}
+
+
+{% block parallax-height %}
+	250px
+{% endblock %}
+
+{% block parallax-title %}
+	<div class="container-fluid">
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="section">
+	<div class="container">
+		<h5 class = "grey-text text-darken-3">Каталог продукции Perfect Organics: </h5>
+	</div>
+</div>
+
+<div class="section scrollspy" id="content">
+	<div class="row">
+
+      <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+        <ul class="collapsible" data-collapsible="accordion">
+            {% recursetree allcategories %}
+				<li>
+                    {% if node.id == category.id or node.id == parent.id %}
+                        <a href="{% url 'get_category_cont' node.id %}#content" class="collapsible-header active grey lighten-2">{{ node.name }}</a>
+                    {% else %}
+                        <a href="{% url 'get_category_cont' node.id %}#content" class="collapsible-header">{{ node.name }}</a>
+                    {% endif %}
+					{% if not node.is_leaf_node %}
+						<ul class="children collapsible-body">
+							{{ children }}
+						</ul>
+					{% endif %}
+				</li>
+			{% endrecursetree %}
+		</ul>
+      </div>
+
+      <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+      	<div class="row">
+
+			{% for cat in content %}
+			<div class="col s12 m6 l3">
+				<a href="
+				{% if isprod %}
+					{% url 'get_product_cont' cat.id %}
+				{% else %}
+					{% url 'get_category_cont' cat.id %}#content
+				{% endif %}
+				">
+					<div class="card hoverable">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator img-height" src="{{ cat.img.url }}">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4"><span class="flow-text">{{ cat.name }}</span></span>
+					</div>
+				</div>
+				</a>
+			</div>
+			{% endfor %}
+
+		</div>
+      </div>
+
+    </div>
+</div>
+{% endblock %}

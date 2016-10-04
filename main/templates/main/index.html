@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+
+{% load staticfiles %}
+
+{% block back-src %}
+	<img class = "img-std" src="{%static "css/images/back1.jpg" %}" alt="Unsplashed background img 1">
+{% endblock %}
+
+{% block parallax-height %}
+	500px
+{% endblock %}
+
+{% block parallax-title %}
+	<div class="container-fluid cn_b">
+        <br><br>
+          <h1 class="header center teal-text text-lighten-2"><span class="white-text">Perfect Organics</span></h1>
+        <div class="row center">
+          <h4 class="header col s12 white-text">Стань финансово независимым и свободным</h4>
+        </div>
+        <div class="row center">
+          <a href="#last_a" id="download-button" class="btn-large waves-effect waves-light blue darken-3">Подробнее</a>
+        </div>
+        <br><br>
+    </div>
+{% endblock %}
+
+{% block content %}
+	 <div class="section">
+	    <div class="container">
+	      <p class="header col s12 black-text">Последние акции:</p>
+	    </div>
+	  </div>
+	  
+	    <div id="last_a" class="section scrollspy">
+	   <div class="slider">
+	      <ul class="slides">
+
+			{% for prod in actionprods %}
+	        <li>
+	          	<img src="{{ prod.back.url }}"> <!-- random image -->
+				<div class="caption right-align">
+					<img class="slider-img" src="{{ prod.img.url }}">
+				</div>
+				<div class="caption left-align">
+					<div class="slider-text">
+						<h3>{{ prod.name }}</h3>
+						<p class="light grey-text text-lighten-3 flow-text">{{ prod.description }}</p>
+					</div>
+					<div class="row center">
+						<a href="{% url 'get_product_cont' prod.id %}" class="btn waves-effect waves-light red darken-3">Подробнее</a>
+					</div>
+				</div>
+	        </li>
+	       {% endfor %}
+
+	      </ul>
+	      </div>
+	    </div>
+
+
+	  <div class="container">
+	    <div class="section">
+
+	      <!--   Icon Section   -->
+	      <div class="row">
+	        <div class="col s12 m4">
+	          <div class="icon-block">
+	            <h2 class="center blue-text text-darken-2"><i class="material-icons">trending_up</i></h2>
+	            <h5 class="center">Развитие и улучшение жизни</h5>
+
+	            <p class="light">Компания "Органика" - одна из ведущих компаний в области разработки, производства и распространения продуктов и услуг, направленных на улучшение качества жизни людей.</p>
+	          </div>
+	        </div>
+
+	        <div class="col s12 m4">
+	          <div class="icon-block">
+	            <h2 class="center blue-text text-darken-2"><i class="material-icons">work</i></h2>
+	            <h5 class="center">Работа</h5>
+
+	            <p class="light">Стабильная работа, растущий доход и множество акций для партнеров компании.</p>
+	          </div>
+	        </div>
+
+	        <div class="col s12 m4">
+	          <div class="icon-block">
+	            <h2 class="center blue-text text-darken-2"><i class="material-icons">my_location</i></h2>
+	            <h5 class="center">Региональный магазин</h5>
+
+	            <p class="light">Нацеленный на определенный регион интернет-магазин товаров компании, возможность заказать товар не выходя из дома.</p>
+	          </div>
+	        </div>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+{% endblock %}

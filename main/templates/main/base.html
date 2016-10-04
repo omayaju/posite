@@ -1,0 +1,114 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Perfect Organics. Региональный интернет-магазин продукции</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{%static "css/materialize.min.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{%static "css/style.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="shortcut icon" href="{% static "css/images/l2.png" %}" type="image/png">
+
+    <style>
+    .parallax-container {
+        min-height: {% block parallax-height %}{% endblock %};
+        line-height: 0;
+        height: auto;
+        color: rgba(255,255,255,.9);
+    }
+    </style>
+
+</head>
+<body>
+  <div id="page-preloader"><span class="spinner"></span></div>
+  <nav class="blue darken-1">
+    <div class="nav-wrapper">
+      <a href="{% url 'index' %}" class="brand-logo white-text center"><img src="{%static "css/images/logo.png" %}" alt="LOGO" width="200" height="auto"></a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a class = "white-text" href="{% url 'index' %}">Главная</a></li>
+        <li><a class = "white-text" href="{% url 'shop' %}">Магазин</a></li>
+        <li><a class = "white-text" href="{% url 'about' %}">О компании</a></li>
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class = "white-text" href="{% url 'basket' %}">Корзина</a></li>
+        <li><a class="btn-floating btn-small waves-effect waves-light green lighten-1 center">{{ pc }}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      {% block parallax-title %} {% endblock %}
+    </div>
+    <div class="parallax">{% block back-src %} {% endblock %}</div>
+  </div>
+
+  {% block content %} {% endblock %}
+
+  <footer class="page-footer grey darken-4">
+    <div class="container-fluid foot">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Perfect Organics</h5>
+          <p class="grey-text text-lighten-4">Региональный интернет-магазин товаров компании "Органика".</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Меню:</h5>
+          <ul>
+            <li><a class="white-text" href="{% url 'index' %}">Главная</a></li>
+            <li><a class="white-text" href="{% url 'shop' %}">Магазин</a></li>
+            <li><a class="white-text" href="#">О компании</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Контакты:</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Адрес:</a></li>
+            <li><a class="white-text" href="#!">Телефон:</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="right">
+          <p>Made by <a class="brown-text text-lighten-3" href="#">stoiK st.</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{%static "js/materialize.js" %}"></script>
+  <script>
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+    $('.slider').slider({full_width: false});
+    $('.scrollspy').scrollSpy();
+    $('.button-collapse').sideNav();
+    $('.parallax').parallax();
+    $('.modal-trigger').leanModal();
+  });
+
+  $(window).on('load', function () {
+          var $preloader = $('#page-preloader'),
+              $spinner   = $preloader.find('.spinner');
+          $spinner.fadeOut();
+          $preloader.delay(500).fadeOut('slow');
+      });
+
+  </script>
+  {% block spec-scripts %}
+  {% endblock %}
+  </body>
+</html>

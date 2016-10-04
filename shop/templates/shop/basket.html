@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+
+{% load staticfiles %}
+{% load mptt_tags %}
+
+{% block back-src %}
+<img class = "img-std" src="{%static "css/images/back3.jpg" %}" alt="Unsplashed background img 1">
+{% endblock %}
+
+
+{% block parallax-height %}
+	150px
+{% endblock %}
+
+{% block parallax-title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="container">
+        <p class="red-text text-darken-3">{{ message }}</p>
+        <h5 class = "blue-text text-darken-3">Корзина заказа:</h5>
+    </div>
+</div>
+<form class="col s12 m12 l12" method="GET">
+    <div class="section">
+        <table>
+            <thead>
+              <tr>
+                  <th data-field="id">Заказанный продукт:</th>
+                  <th data-field="name">Количество:</th>
+                  <th data-field="price">Стоимость (1ед. продукта):</th>
+                  <th data-field="delete">Убрать из корзины</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+            {% for p in prods %}
+              <tr>
+                <td>{{ p.name }}</td>
+                <td>
+                    <div class="row">
+                        {% csrf_token %}
+                            <p class="range-field">
+                                <div class="col s2 m2 l2"></div>
+                                <input class="col s2 s2 l2" type="text" id="input_count_{{ p.id }}" name = "input_count_{{ p.id }}" value="1">
+                                <div class="col s8 m8 l8"></div>
+                            </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="row">
+                    <div class="col s4 m4 l4"></div><input id="input_count_{{ p.id }}_string" class="col s4 m4 l4" disabled value="{{ p.cost }}"></input>
+                    </div>
+                </td>
+                  <td><a href="{% url 'delete' p.id %}" class="btn red darken-3 waves-effect waves-light white text"><i><i class="material-icons">replay</i></i></a></td>
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <button data-target="modal1" class="btn modal-trigger waves-effect waves-light grey darken-3 right">Контактная информация</button>
+        </div>
+    </div>
+    <div class="section"><br><br><br></div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12"><p class="grey-text text-darken-2 right">Для того, чтобы оформить заказ обязательно заполните контактную информацию!</p></div>
+                <div class="col s8 m8 l8"></div>
+                <div class="col s4 m4 l4"><button class="btn-large grey darken-1 waves-effect waves-light right" type="submit" name="action">Оформить заказ</button></div>
+            </div>
+        </div>
+    </div>
+<div class="section"><br><br><br></div>
+
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Контактная информация:</h4>
+      <div class="row">
+          <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                {{ form.pername }}
+                <label for="name">Имя</label>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                {{ form.perphone }}
+                <label for="phone">Телефон</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+                {{ form.peremail }}
+                <label for="email">Email</label>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action modal-close waves-effect waves-green btn-flat">ОК</div>
+    </div>
+  </div>
+
+</form>
+{% endblock %}
+
+{% block spec-scripts %}
+    {% if message == 'Заказ отправлен' %}
+<script>
+    setTimeout(function() {
+         $(location).attr('href','{% url 'index' %}');
+    }, 2000);
+</script>
+    {% endif %}
+    {% if message == 'Товар удален' %}
+<script>
+    setTimeout(function() {
+         $(location).attr('href','{% url 'basket' %}');
+    }, 1000);
+</script>
+    {% endif %}
+{% endblock %}
